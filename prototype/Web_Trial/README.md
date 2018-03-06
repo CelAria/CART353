@@ -1,2 +1,2 @@
 # Web_Trial
-First iteration of porftolio website
+Iterations & test of 3D web graphic to be used as a landing page for personal portfolio 
