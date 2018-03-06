@@ -8,6 +8,8 @@ This Prototype Folder Contains:
 
 * PDF presentation regarding new conceptual & technical developments regarding the prototype, process, and research creation
 
+* PDF artist statement
+
 * "Web_Trial": an in progress prototype using three.js which is currently just exploring the functionality of three.js
 This is still in research stage and learning for Three.js
 
