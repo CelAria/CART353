@@ -1,0 +1,251 @@
+<!-- Landing page of Celeste Pimm's portfolio website
+
+landing page for portfolio website with the familiar left navigation bar and 3D diamond loader using three.js
+This file is the only file that uses the loader.css style sheet, all other html files use the layout.css style sheet
+
+Diamond model courtest of supernode via https://free3d.com/3d-model/diamond-gem-70755.html-->
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<title>Celeste Pimm</title>
+<link rel="stylesheet" href="styles/loader.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i" rel="stylesheet">
+<script src="js/three.js"></script>
+
+<!-- javascript libraries for three.js -->
+	<script src="js/TrackballControls.js"></script>
+	<script src="js/OBJLoader.js"></script>
+	<script src="js/Detector.js"></script>
+	<script src="js/stats.min.js"></script> 
+	<script src="js/underscore.js"></script>
+
+</head>
+<body>
+<!-- content formatting-->
+<div id="container">
+		
+	<!-- celeste name logo title -->
+	<div id="sidebar">
+		<div id="logo_title">
+			<nav>
+			<ul>
+				<li class="loaderlogo">
+					<img src="images/demo/Celeste_pinklogo.png" alt="celeste pimm">
+				</li>
+			</ul>
+			</nav>
+		</div>
+
+		<!-- left navigation column -->
+		<div id="left_column_neon">
+			<div id="left_column">
+				<h2 class="title">PROJECTS</h2>
+				<nav>
+					<ul>
+					<li><a href="traces.html">Traces</a></li>
+					<li><a href="resolution.html">Resolution</a></li>
+					<li><a href="liquidity.html">Liquidity</a></li>
+					<li><a href="resonantzenith.html">Resonant Zenith</a></li>
+					<li><a href="fulloffeeling.html">Full of Feeling</a></li>
+					<li class="last"><a href="curses.html">Curses</a></li>
+					</ul>
+				</nav>
+				<h2 class="title">ABOUT ME</h2>
+				<nav>
+					<ul>
+					<li><a href="artiststatement.html">Artist's Statement</a></li>
+					<li><a href="images/demo/CelestePimm_CurriculumVitae.pdf" target="_blank">CV</a></li>
+					<li><a href="aboutme.html">Bio</a></li>
+					</ul>
+				</nav>
+				<h2 class="title">CONTACT</h2>
+				<nav>
+					<ul>
+					<li class="last"><a href="info.html">Info</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+  <!-- in-line styling to makesure background is full black -->
+		<style>
+			body {
+			background-color: #000;
+			margin: 0px;
+			overflow: hidden;
+		}
+		</style>
+	</head>
+<body>
+		
+<!--******************************************* Diamond Loader **********************************-->
+  
+  <!-- Object loader code example provided by Three.js /Mr.Doob available at
+https://github.com/mrdoob/three.js/blob/master/examples/webgl_lights_pointlights.html -->
+
+			<script>
+	
+				if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+				//DECLARE VARIABLES
+				var camera, scene, renderer, controls;
+				var light1, light2, light3, light4, light5, light6;
+				var clock = new THREE.Clock();
+				var stats;
+				init();
+				animate();
+				function init() {
+					var container = document.getElementById( 'container' );
+					// CAMERA
+					camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 300 );
+					camera.position.set( 0, 15, 150 );
+					camera.lookAt( new THREE.Vector3() );
+	
+					// SCENE
+					scene = new THREE.Scene();
+					scene.background = new THREE.Color( 0x040306 );
+					scene.fog = new THREE.Fog( 0x040306, 10, 300 );
+					// CONTROLS
+					controls = new THREE.TrackballControls( camera );
+					controls.rotateSpeed = 1.0;
+					controls.zoomSpeed = 1.2;
+					controls.panSpeed = 0.8;
+					controls.noZoom = false;
+					controls.noPan = false;
+					controls.staticMoving = false;
+					controls.dynamicDampingFactor = 0.15;
+					controls.keys = [ 65, 83, 68 ];
+
+					// TEXTURES (not yet working)
+
+
+					// var textureLoader = new THREE.TextureLoader();
+					// var texture = textureLoader.load( "assets/neoncity.jpg" );
+					// texture.repeat.set( 20, 10 );
+					// texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+					// texture.format = THREE.RGBFormat;
+					// MATERIALS
+					// var groundMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture } );
+					// var objectMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:true,} );
+
+					// Object loader for loading Diamond.obj 
+
+					var objLoader = new THREE.OBJLoader();
+					objLoader.setPath("/assets/");
+					objLoader.load('Diamondss.obj', function (object) {
+					scene.add(object);
+					object.scale.set( 0.5, 0.5, 0.5)
+					object.position.y -= 25;
+					renderer.render(scene, camera);	
+			});
+	
+				
+					// LIGHTS
+					var intensity = 2.5;
+					var distance = 100;
+					var decay =0;
+					//colours for point lights
+					var c1 = 0xff0040, c2 = 0x0030ff, c3 = 0x80ff80, c4 = 0xffaa00, c5 = 0x00ffaa, c6 = 0xff1100; c7 = 0xffffff; c8 = 0xFF1E77;
+					var sphere = new THREE.SphereGeometry( 0.50, 16, 8 );
+					
+					light1 = new THREE.PointLight( c1, intensity, distance, decay );
+					light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c1 } ) ) );
+					scene.add( light1 );
+					light2 = new THREE.PointLight( c2, intensity, distance, decay );
+					light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c2 } ) ) );
+					scene.add( light2 );
+					light3 = new THREE.PointLight( c3, intensity, distance, decay );
+					light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c3 } ) ) );
+					scene.add( light3 );
+					light4 = new THREE.PointLight( c4, intensity, distance, decay );
+					light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c4 } ) ) );
+					scene.add( light4 );
+					light5 = new THREE.PointLight( c5, intensity, distance, decay );
+					light5.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c5 } ) ) );
+					scene.add( light5 );
+					light6 = new THREE.PointLight( c6, intensity, distance, decay );
+					light6.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c6 } ) ) );
+					scene.add( light6 );
+					light7 = new THREE.PointLight( c6, intensity, distance, decay );
+					light7.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c7 } ) ) );
+					scene.add( light7 );
+					light8 = new THREE.PointLight( c6, intensity, distance, decay );
+					light8.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c8} ) ) );
+					scene.add( light8 );
+
+					//directional light for ambient light in addition to point lights
+					var dlight = new THREE.DirectionalLight( 0xffffff, 0.05 );
+					dlight.position.set( 0.5, 1, 0 ).normalize();
+					scene.add( dlight );
+					
+					//more directional light 
+					var dlight3 = new THREE.DirectionalLight( 0xffffff, 0.05 );
+					dlight.position.set( 0, 1, 0 ).normalize();
+					scene.add( dlight3);
+
+					// RENDERER
+					renderer = new THREE.WebGLRenderer( { antialias: false } );
+					renderer.setPixelRatio( window.devicePixelRatio );
+					renderer.setSize( window.innerWidth, window.innerHeight );
+					container.appendChild( renderer.domElement );
+					renderer.gammaInput = true;
+					renderer.gammaOutput = true;
+					// STATS
+					stats = new Stats();
+					// container.appendChild( stats.dom );
+					//
+					window.addEventListener( 'resize', onWindowResize, false );
+				}
+				function onWindowResize() {
+					camera.aspect = window.innerWidth / window.innerHeight;
+					camera.updateProjectionMatrix();
+					renderer.setSize( window.innerWidth, window.innerHeight );
+					controls.handleResize();
+				}
+				//ANIMATE
+				function animate() {
+					requestAnimationFrame( animate );
+					render();
+					stats.update();
+				}
+				//RENDER
+				function render() {
+					var time = Date.now() * 0.00025;
+					var z = 20, d = 2000;
+
+					//first orbit of lights 1-4
+					light1.position.x = Math.sin( time * 0.7 ) * 30;
+					light1.position.y = Math.cos( time * 0.5 ) * 40;
+					light1.position.z = Math.cos( time * 0.3 ) * 30;
+					light2.position.x = Math.cos( time * 0.3 ) * 30;
+					light2.position.y = Math.sin( time * 0.5 ) * 40;
+					light2.position.z = Math.sin( time * 0.7 ) * 30;
+					light3.position.x = Math.sin( time * 0.7 ) * 30;
+					light3.position.y = Math.cos( time * 0.3 ) * 40;
+					light3.position.z = Math.sin( time * 0.5 ) * 30;
+					light4.position.x = Math.sin( time * 0.3 ) * 30;
+					light4.position.y = Math.cos( time * 0.7 ) * 40;
+					light4.position.z = Math.sin( time * 0.5 ) * 30;
+					//second orbit, lights 5-8
+					light5.position.x = Math.cos( time * 0.3 ) * d;
+					light5.position.z = Math.sin( time * 0.5 ) * d;
+					light6.position.x = Math.cos( time * 0.7 ) * d;
+					light6.position.z = Math.cos( time * 0.5 ) * d;
+					light7.position.x = Math.cos( time * 0.9 ) * d;
+					light7.position.z = Math.cos( time * 0.3 ) * d;
+					light8.position.x = 100;
+					light8.position.z = 100;
+
+					controls.update( clock.getDelta() );
+					renderer.render( scene, camera );
+				}
+			</script> -->
+		</body>
+</body>
+</html>
