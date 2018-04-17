@@ -9,7 +9,7 @@ Files to be give particular attention:
 index.hmtl
 loader.css
 
-
+Four additional iterations of index.html are included 
 
 Artist Statement:
 Diffractive Methodologies
