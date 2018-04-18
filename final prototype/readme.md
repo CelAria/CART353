@@ -1,7 +1,7 @@
 
 Final Prototype
 
-can be viewed live on the web at: https://hybrid.concordia.ca/c_pimm/Celeste_Website/
+can be viewed live on the web at: https://hybrid.concordia.ca/c_pimm
 
 
 Files to be give particular attention:
